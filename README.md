@@ -7,3 +7,12 @@
 - add the typeorm configuration to module
 - inject studentRepository into service class
 - create get and add functionality
+- test get and add functionality
+
+
+## CQRS - command and event
+- sending out command from service with command `this.commandBus.execute(new StudentCommand))`
+- this will be handled by `StudentCommandHandler` class which can also send out event 
+- event can be dispatched by `this.eventBus.publish(new StudentEvent))`
+- this can be listened by `StudentSagas` which will listend to `StudentEvent` event 
+- then it will be call `BooksCommand` to run different command 

@@ -11,6 +11,8 @@ import { StudentSagas } from './cqrs/student.saga';
 import { StudentEventHandler } from './cqrs/studtent.event.handler';
 import { Books } from './entities/books.entity';
 import { Student } from './entities/student.entity';
+import { StudentQuery } from './query/student.query';
+import { GetStudentHandler } from './query/student.query.handler';
 
 @Module({
   imports: [
@@ -35,6 +37,9 @@ import { Student } from './entities/student.entity';
     StudentSagas,
     BooksCommand,
     BookCommandHandler,
+
+    GetStudentHandler,
+    StudentQuery
   ],
 })
 export class AppModule {}

@@ -1,17 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CommandBus } from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { Repository } from 'typeorm';
 import { Student } from './entities/student.entity';
 import { StudentCommand } from './cqrs/student.command';
 import { Books } from './entities/books.entity';
+import { StudentQuery } from './query/student.query';
 
 @Injectable()
 export class AppService {
   constructor(
     private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
+
     @InjectRepository(Student)
     private studentRepository: Repository<Student>,
+    
     @InjectRepository(Books)
     private bookRepository: Repository<Books>,
   ) {}
@@ -21,10 +25,7 @@ export class AppService {
    * @returns Students
    */
   async getStudents() {
-    return {
-      student: await this.studentRepository.find(),
-      books: await this.bookRepository.find(),
-    };
+    return this.queryBus.execute(new StudentQuery());
   }
 
   /**

@@ -16,3 +16,8 @@
 - event can be dispatched by `this.eventBus.publish(new StudentEvent))`
 - this can be listened by `StudentSagas` which will listend to `StudentEvent` event 
 - then it will be call `BooksCommand` to run different command 
+
+
+## Query 
+- in service we call query `this.queryBus.execute(new StudentQuery())`
+- and `GetStudentHandler` to handle the query
